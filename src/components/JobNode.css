@@ -1,0 +1,91 @@
+.task-node {
+  position: relative;
+  height: 70px;
+  width: 240px;
+  padding: 10px 15px;
+  border-radius: 12px; /* Smooth rounded edges */
+  background: #ffffff; /* Clean white background */
+  border: 3px solid #e0e0e0; /* Subtle gray border */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  font-family: 'Roboto', sans-serif; /* Modern and clean font */
+  font-size: 14px;
+  font-weight: 500;
+  color: #333; /* Neutral dark text color */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08); /* Light shadow for depth */
+}
+
+.task-node:hover {
+  border-color: #90caf9; /* Subtle blue hover effect */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Enhance shadow on hover */
+}
+
+.task-node.done {
+  border-color: #488b4b; /* Green border for done tasks */
+  background: #f5fcf7; /* Light green background */
+}
+
+.task-node.not-done {
+  border-color: #ce6766; /* Red border for not done tasks */
+  background: #fcf7f7; /* Light red background */
+}
+
+/* Label styling */
+.task-label {
+  width: 100%;
+  text-align: center;
+  word-wrap: break-word;
+  line-height: 1.4;
+}
+
+/* Task toggle button */
+.task-toggle {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.task-toggle:hover {
+  transform: scale(1.1); /* Slightly enlarge on hover */
+}
+
+.task-toggle .MuiSvgIcon-root {
+  color: #333; /* Default icon color */
+  font-size: 20px;
+}
+
+.task-node.done .task-toggle .MuiSvgIcon-root {
+  color: #388e3c; /* Green for done state */
+}
+
+.task-node.not-done .task-toggle .MuiSvgIcon-root {
+  color: #d32f2f; /* Red for not done state */
+}
+
+/* Input field (edit mode) */
+.task-node input {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #333;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 5px;
+  width: 100%;
+  box-sizing: border-box;
+  background: #ffffff;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.task-node input:focus {
+  outline: none;
+  border-color: #90caf9; /* Blue border on focus */
+}
