@@ -13,9 +13,10 @@ import { v4 as uuidv4 } from 'uuid';
 import '@xyflow/react/dist/style.css';
 import TaskNode from './components/TaskNode/TaskNode';
 import TextChangerPopup from './components/TextChangerPopup/TextChangerPopup';
+import ConnectionLine from './components/ConnectionLine/ConnectionLine';
 
 export default function Job() {
-    const initialNodes = [{ id: uuidv4(), position: { x: 0, y: 0 }, data: { label: 'an example task' }, type: 'task' }];
+    const initialNodes = [{ id: uuidv4(), position: { x: 0, y: 0 }, data: { label: 'an example task', isConnectable: false }, type: 'task' }];
     const initialEdges = [];
 
     const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
@@ -46,14 +47,14 @@ export default function Job() {
                         x: clientX,
                         y: clientY,
                     }),
-                    data: { label: 'an example task' },
+                    data: { label: 'an example task', isConnectable: false },
                     origin: [0.5, 0.5],
                     type: 'task'
                 };
 
                 setNodes((nds) => nds.concat(newNode));
                 setEdges((eds) =>
-                    eds.concat({ id, source: connectionState.fromNode.id, target: id }),
+                    eds.concat({ id, source: connectionState.fromNode.id, target: id, type: 'smoothstep' }),
                 );
             }
         },
@@ -148,6 +149,7 @@ export default function Job() {
                 onNodeClick={(event, node) => onNodeClicked(event, node)}
                 onPaneClick={onPaneClicked}
                 onNodeDoubleClick={(event, _) => onNodeDoubleClicked(event)}
+                connectionLineComponent={ConnectionLine}
                 nodeTypes={nodeTypes}
             >
                 {popupOpen && (

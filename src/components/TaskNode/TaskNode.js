@@ -3,7 +3,11 @@ import IconButton from '@mui/material/IconButton';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import './TaskNode.css'; // Import the CSS file for styling
 
-const TaskNode = ({ data, isConnectable }) => {
+const isValidConnection = (connection) => {
+  return connection.source != connection.target
+}
+
+const TaskNode = ({ data }) => {
   return (
     <> {data.isSelected ? <div className="task-toggle">
       <IconButton
@@ -22,14 +26,17 @@ const TaskNode = ({ data, isConnectable }) => {
         <Handle
           type="target"
           position={Position.Left}
-          isConnectable={isConnectable}
+          isConnectable={data.isConnectable}
+          style={{ background: '#fff', border: '2px solid rgb(0, 0, 0)' }}
         />
         <div className="task-label">{data.label}</div>
         <Handle
           type="source"
           position={Position.Right}
           id="b"
-          isConnectable={isConnectable}
+          isConnectable={true}
+          isValidConnection={isValidConnection}
+          style={{ background: '#fff', border: '2px solid rgb(0, 0, 0)' }}
         />
       </div>
     </>
