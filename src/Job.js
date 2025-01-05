@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
     ReactFlow,
     MiniMap,
@@ -60,6 +60,37 @@ export default function Job() {
         [screenToFlowPosition],
     );
 
+    useEffect(() => {
+        if (selectedNode != null) {
+            setNodes((nds) =>
+                nds.map((node) => {
+                    if (node.id === selectedNode.id) {
+                        return {
+                            ...node,
+                            data: {
+                                ...node.data,
+                                isSelected: true
+                            },
+                        };
+                    }
+                    return node;
+                }),
+            );
+        } else {
+            setNodes((nds) =>
+                nds.map((node) => {
+                    return {
+                        ...node,
+                        data: {
+                            ...node.data,
+                            isSelected: false
+                        },
+                    };
+                }),
+            );
+        }
+      }, [selectedNode]);
+
     const onPaneClicked = () => {
         setSelectedNode(null);
         closePopup()
@@ -67,7 +98,7 @@ export default function Job() {
 
     const onNodeClicked = (event, node) => {
         if (node != selectedNode) {
-            setSelectedNode(node) 
+            setSelectedNode(node)
         }
     }
 
