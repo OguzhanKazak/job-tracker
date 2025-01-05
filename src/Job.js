@@ -22,7 +22,6 @@ export default function Job() {
     const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
     const [selectedNode, setSelectedNode] = useState(null);
     const [popupOpen, setPopupOpen] = useState(false);
-    const [popupAnchor, setPopupAnchor] = useState(null);
 
     const { screenToFlowPosition } = useReactFlow();
 
@@ -68,8 +67,7 @@ export default function Job() {
 
     const onNodeClicked = (event, node) => {
         if (node != selectedNode) {
-            setSelectedNode(node)
-            closePopup()
+            setSelectedNode(node) 
         }
     }
 
@@ -99,14 +97,12 @@ export default function Job() {
         closePopup();
     };
 
-    const openPopup = (event) => {
-        setPopupAnchor(event.currentTarget);
+    const openPopup = () => {
         setPopupOpen(true);
     };
 
     const closePopup = () => {
         setPopupOpen(false);
-        setPopupAnchor(null);
     };
 
     return (
@@ -126,7 +122,7 @@ export default function Job() {
                 {popupOpen && (
                     <TextChangerPopup
                         open={popupOpen}
-                        anchor={popupAnchor}
+                        onClose={() => setPopupOpen(false)}
                         onEnterPress={handleEnterPress}
                     />
                 )}
