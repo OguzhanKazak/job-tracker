@@ -35,9 +35,7 @@ export default function Job() {
 
     const onConnectEnd = useCallback(
         (event, connectionState) => {
-            // when a connection is dropped on the pane it's not valid
             if (!connectionState.isValid) {
-                // we need to remove the wrapper bounds, in order to get the correct position
                 const id = uuidv4();
                 const { clientX, clientY } =
                     'changedTouches' in event ? event.changedTouches[0] : event;
@@ -111,7 +109,7 @@ export default function Job() {
         }
     };
 
-    const handleEnterPress = (text) => {
+    const handleEnterPress = (text, date) => {
         setNodes((nds) =>
             nds.map((node) => {
                 if (node.id === selectedNode.id) {
@@ -120,6 +118,7 @@ export default function Job() {
                         data: {
                             ...node.data,
                             label: text,
+                            date: date
                         },
                     };
                 }
